@@ -1,0 +1,435 @@
+/* =====================================
+   LEKHASREE.AI
+   RESPONSIVE DESIGN
+===================================== */
+
+/* ==========================
+   LARGE LAPTOPS
+========================== */
+
+@media (max-width: 1400px) {
+
+    .hero h1 {
+        font-size: 5rem;
+    }
+
+    .robot-wrapper {
+        width: 450px;
+        height: 450px;
+    }
+
+    .robot {
+        width: 340px;
+    }
+
+}
+
+/* ==========================
+   LAPTOPS
+========================== */
+
+@media (max-width: 1200px) {
+
+    .hero {
+
+        gap: 50px;
+
+        padding:
+            120px 5%;
+
+    }
+
+    .hero h1 {
+
+        font-size: 4.5rem;
+
+    }
+
+    .robot {
+
+        width: 300px;
+
+    }
+
+    .halo-ring {
+
+        width: 380px;
+        height: 380px;
+
+    }
+
+    .halo-ring.second {
+
+        width: 440px;
+        height: 440px;
+
+    }
+
+}
+
+/* ==========================
+   TABLETS
+========================== */
+
+@media (max-width: 992px) {
+
+    .navbar {
+
+        padding:
+            0 30px;
+
+    }
+
+    .navbar ul {
+
+        gap: 20px;
+
+    }
+
+    .hero {
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        text-align: center;
+
+        padding-top: 140px;
+
+    }
+
+    .hero-left {
+
+        width: 100%;
+
+    }
+
+    .hero-right {
+
+        width: 100%;
+
+        margin-top: 50px;
+
+    }
+
+    .hero-buttons {
+
+        justify-content: center;
+
+    }
+
+    .hero h1 {
+
+        font-size: 4rem;
+
+    }
+
+    .section-title {
+
+        font-size: 2.4rem;
+
+        text-align: center;
+
+    }
+
+    .contact-box {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .stats-section {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+/* ==========================
+   MOBILE LANDSCAPE
+========================== */
+
+@media (max-width: 768px) {
+
+    .navbar {
+
+        height: 70px;
+
+    }
+
+    .logo {
+
+        font-size: 1.2rem;
+
+    }
+
+    .navbar ul {
+
+        gap: 15px;
+
+    }
+
+    .navbar a {
+
+        font-size: .9rem;
+
+    }
+
+    .hero {
+
+        min-height: auto;
+
+        padding:
+            120px 25px 80px;
+
+    }
+
+    .hero h1 {
+
+        font-size: 3.2rem;
+
+    }
+
+    .hero p {
+
+        font-size: .95rem;
+
+    }
+
+    .typed-container {
+
+        font-size: 1rem;
+
+    }
+
+    .robot-wrapper {
+
+        width: 320px;
+        height: 320px;
+
+    }
+
+    .robot {
+
+        width: 240px;
+
+    }
+
+    .halo-ring {
+
+        width: 260px;
+        height: 260px;
+
+    }
+
+    .halo-ring.second {
+
+        width: 320px;
+        height: 320px;
+
+    }
+
+    .section {
+
+        padding:
+            90px 25px;
+
+    }
+
+    .glass-card {
+
+        padding: 25px;
+
+    }
+
+    .skills-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .projects-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width: 576px) {
+
+    .navbar {
+
+        flex-direction: column;
+
+        height: auto;
+
+        padding: 15px;
+
+    }
+
+    .navbar ul {
+
+        margin-top: 10px;
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+    }
+
+    .hero {
+
+        padding-top: 170px;
+
+    }
+
+    .hero h1 {
+
+        font-size: 2.7rem;
+
+        line-height: 1.1;
+
+    }
+
+    .hero-tag {
+
+        font-size: .8rem;
+
+    }
+
+    .btn-primary,
+    .btn-outline {
+
+        width: 100%;
+
+        text-align: center;
+
+    }
+
+    .hero-buttons {
+
+        flex-direction: column;
+
+    }
+
+    .robot-wrapper {
+
+        width: 280px;
+        height: 280px;
+
+    }
+
+    .robot {
+
+        width: 200px;
+
+    }
+
+    .timeline {
+
+        margin-left: 10px;
+
+    }
+
+    .timeline-item {
+
+        padding-left: 30px;
+
+    }
+
+    .stats-section {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .stat h2 {
+
+        font-size: 2.3rem;
+
+    }
+
+    .contact-info {
+
+        padding: 25px;
+
+    }
+
+    input,
+    textarea {
+
+        font-size: .95rem;
+
+    }
+
+}
+
+/* ==========================
+   VERY SMALL DEVICES
+========================== */
+
+@media (max-width: 400px) {
+
+    .hero h1 {
+
+        font-size: 2.2rem;
+
+    }
+
+    .section-title {
+
+        font-size: 2rem;
+
+    }
+
+    .robot {
+
+        width: 170px;
+
+    }
+
+    .robot-wrapper {
+
+        width: 240px;
+        height: 240px;
+
+    }
+
+}
+
+/* ==========================
+   DASHBOARD RESPONSIVE
+========================== */
+
+@media (max-width: 700px) {
+
+    .dashboard-popup {
+
+        width: 90%;
+
+        padding: 25px;
+
+    }
+
+}
+
+/* ==========================
+   TOUCH DEVICES
+========================== */
+
+@media (hover:none) {
+
+    .cursor {
+
+        display: none;
+
+    }
+
+}
