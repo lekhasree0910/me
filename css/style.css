@@ -129,26 +129,15 @@ CURSOR
 =========================== */
 
 .cursor {
-
     position: fixed;
-
-    width: 20px;
-
-    height: 20px;
-
-    border: 2px solid var(--gold);
-
+    width: 10px;
+    height: 10px;
+    border: 1px solid var(--gold);
     border-radius: 50%;
-
     pointer-events: none;
-
     z-index: 9999;
-
     transition: .08s;
-
-    box-shadow:
-        0 0 20px var(--gold);
-
+    box-shadow: 0 0 10px var(--gold);
 }
 
 /* ===========================
@@ -428,23 +417,23 @@ ROBOT
 }
 
 .robot {
-
     width: 380px;
-
     position: absolute;
-
     left: 50%;
-
     top: 50%;
-
-    transform:
-        translate(-50%, -50%);
-
+    transform: translate(-50%, -50%);
     z-index: 5;
+    filter: drop-shadow(0 0 40px rgba(212, 175, 55, .35));
+    animation: gentleFloat 4s ease-in-out infinite;
+}
 
-    filter:
-        drop-shadow(0 0 40px rgba(212, 175, 55, .35));
-
+@keyframes gentleFloat {
+    0%, 100% {
+        transform: translate(-50%, -50%);
+    }
+    50% {
+        transform: translate(-50%, -55%);
+    }
 }
 
 .halo-ring {
@@ -569,21 +558,28 @@ SKILLS
 }
 
 .skill-node {
-
     background: #0f0f0f;
-
     border: 1px solid rgba(212, 175, 55, .12);
-
     border-radius: 20px;
-
     padding: 30px;
-
     text-align: center;
-
     transition: .4s;
-
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
 
+.skill-node i {
+    font-size: 2.5rem;
+    color: var(--gold);
+    transition: .4s;
+}
+
+.skill-node:hover i {
+    transform: scale(1.1);
+    color: var(--white);
 }
 
 .skill-node:hover {
@@ -1399,84 +1395,6 @@ ANIMATIONS
 
 }
 
-@media(max-width:768px) {
-
-    #menuToggle {
-
-        display: block;
-
-    }
-
-    .nav-links {
-
-        position: fixed;
-
-        top: 0;
-
-        right: -100%;
-
-        width: 280px;
-
-        height: 100vh;
-
-        background: #080808;
-
-        flex-direction: column;
-
-        padding: 40px;
-
-        transition: .4s;
-
-    }
-
-    .nav-links.active {
-
-        right: 0;
-
-    }
-
-}
-
-@media (max-width: 992px) {
-
-    .hero {
-
-        flex-direction: row;
-
-        align-items: center;
-
-        justify-content: space-between;
-
-        gap: 20px;
-
-    }
-
-    .hero-left {
-
-        width: 55%;
-
-    }
-
-    .hero-right {
-
-        width: 45%;
-
-    }
-
-    .hero h1 {
-
-        font-size: 3rem;
-
-    }
-
-    .robot {
-
-        width: 220px;
-
-    }
-
-}
-
 .bar {
 
     height: 10px;
@@ -1824,12 +1742,37 @@ ANIMATIONS
 
 }
 
-@media(max-width:500px) {
-
-    .projects-grid {
-
-        grid-template-columns: 1fr;
-
+@media(max-width: 992px) {
+    .hero {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
     }
+    .hero-left { width: 55%; }
+    .hero-right { width: 45%; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3rem); }
+    .robot { width: clamp(150px, 25vw, 220px); }
+}
 
+@media(max-width: 768px) {
+    #menuToggle { display: block; }
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: min(80vw, 280px);
+        height: 100vh;
+        background: #080808;
+        flex-direction: column;
+        padding: 40px;
+        transition: .4s;
+    }
+    .nav-links.active { right: 0; }
+}
+
+@media(max-width: 500px) {
+    .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
 }
