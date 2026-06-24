@@ -128,7 +128,7 @@ LOADER
 CURSOR
 =========================== */
 
-.cursor {
+/*.cursor {
     position: fixed;
     width: 10px;
     height: 10px;
