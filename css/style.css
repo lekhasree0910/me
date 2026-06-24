@@ -602,9 +602,17 @@ TIMELINE
 
     border-left:
         2px solid var(--gold);
-
+    flex:1;
     margin-left: 20px;
+    min-width:300px;
 
+}
+
+.timeline-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
 }
 
 .timeline-item {
@@ -615,6 +623,28 @@ TIMELINE
 
     padding-left: 50px;
 
+}
+.timeline-image {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timeline-image img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 20px; /* Applies rounded corners */
+    box-shadow: var(--shadow);
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+    .timeline-wrapper {
+        flex-direction: column;
+    }
 }
 
 .timeline-item::before {
