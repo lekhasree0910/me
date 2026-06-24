@@ -106,21 +106,42 @@ new Typed("#typed", {
    CURSOR
 ===================================== */
 
-const cursor =
-    document.querySelector(".cursor");
+const cursor = document.querySelector(".cursor");
+let cursorX = 0, cursorY = 0;
+let mouseX = 0, mouseY = 0;
 
-document.addEventListener(
-    "mousemove",
-    e => {
+document.addEventListener("mousemove", e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
 
-        cursor.style.left =
-            e.clientX + "px";
-
-        cursor.style.top =
-            e.clientY + "px";
-
+// Smooth cursor update loop using linear interpolation
+function updateCursor() {
+    cursorX += (mouseX - cursorX) * 0.16;
+    cursorY += (mouseY - cursorY) * 0.16;
+    
+    if (cursor) {
+        cursor.style.left = cursorX + "px";
+        cursor.style.top = cursorY + "px";
     }
-);
+    requestAnimationFrame(updateCursor);
+}
+updateCursor();
+
+// Cursor hovered state for interactive elements
+function setupCursorHovers() {
+    const hoverables = document.querySelectorAll("a, button, .skill-node, .project-card, .featured-project, .social-card, .about-stat, .achievement");
+    hoverables.forEach(el => {
+        el.addEventListener("mouseenter", () => {
+            if (cursor) cursor.classList.add("hovered");
+        });
+        el.addEventListener("mouseleave", () => {
+            if (cursor) cursor.classList.remove("hovered");
+        });
+    });
+}
+// Run setup after page load
+window.addEventListener("load", setupCursorHovers);
 
 /* =====================================
    HERO ANIMATION
@@ -197,89 +218,127 @@ gsap.from(".robot", {
 });
 
 /* =====================================
-   SECTION REVEAL
+   3D SECTION REVEAL FLOW
 ===================================== */
 
-document
-    .querySelectorAll(".section")
-    .forEach(section => {
+document.querySelectorAll(".section").forEach(section => {
+    // Enable 3D rendering context
+    section.style.perspective = "1200px";
+    section.style.transformStyle = "preserve-3d";
 
-        gsap.from(section, {
+    const title = section.querySelector(".section-title");
+    const children = section.querySelectorAll(
+        ".about-container, .skills-grid > *, .timeline-wrapper > *, .featured-project, .project-card, .achievement, .social-card, .contact-container > *"
+    );
 
+    if (title) {
+        gsap.from(title, {
             scrollTrigger: {
-
-                trigger: section,
-
-                start: "top 80%"
-
+                trigger: title,
+                start: "top 88%",
+                toggleActions: "play none none none"
             },
-
             opacity: 0,
-
-            y: 80,
-
-            duration: 1
-
+            y: 40,
+            rotationX: -15,
+            transformOrigin: "top center",
+            duration: 0.8,
+            ease: "power2.out"
         });
+    }
 
-    });
+    if (children.length > 0) {
+        gsap.from(children, {
+            scrollTrigger: {
+                trigger: section,
+                start: "top 80%",
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            y: 60,
+            rotationX: -12,
+            rotationY: -5,
+            scale: 0.93,
+            transformOrigin: "center center",
+            stagger: 0.08,
+            duration: 1,
+            ease: "power3.out"
+        });
+    }
+});
 
 /* =====================================
-   PROJECT CARDS
+   3D HOVER TILT & GLARE EFFECT
 ===================================== */
 
-document
-    .querySelectorAll(".project-card")
-    .forEach(card => {
+const tiltElements = document.querySelectorAll(
+    ".project-card, .featured-project, .skill-node, .about-stat, .achievement, .social-card, .contact-left, .contact-right"
+);
 
-        card.addEventListener(
-            "mousemove",
-            e => {
+tiltElements.forEach(card => {
+    // Dynamically insert transparent glare overlay
+    const glare = document.createElement("div");
+    glare.className = "card-glare";
+    
+    // Base inline styles for glare
+    glare.style.position = "absolute";
+    glare.style.inset = "0";
+    glare.style.pointerEvents = "none";
+    glare.style.borderRadius = "inherit";
+    glare.style.zIndex = "3";
+    glare.style.mixBlendMode = "overlay";
+    glare.style.opacity = "0";
+    
+    if (window.getComputedStyle(card).position === "static") {
+        card.style.position = "relative";
+    }
+    card.appendChild(glare);
 
-                const rect =
-                    card.getBoundingClientRect();
+    card.addEventListener("mousemove", e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
 
-                const x =
-                    e.clientX -
-                    rect.left;
+        // Calculate rotation degrees based on mouse position relative to card center
+        const rotateY = ((x / rect.width) - 0.5) * 12; // Max 12deg tilt
+        const rotateX = (0.5 - (y / rect.height)) * 12;
 
-                const y =
-                    e.clientY -
-                    rect.top;
+        // Animate tilt and glare using GSAP for bulletproof reset capability
+        gsap.to(card, {
+            transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px) scale3d(1.02, 1.02, 1.02)`,
+            duration: 0.3,
+            ease: "power2.out",
+            overwrite: "auto"
+        });
 
-                const rotateY =
-                    (x /
-                        rect.width -
-                        0.5) *
-                    15;
-
-                const rotateX =
-                    (0.5 -
-                        y /
-                        rect.height) *
-                    15;
-
-                card.style.transform =
-                    `
-                    perspective(1000px)
-                    rotateX(${rotateX}deg)
-                    rotateY(${rotateY}deg)
-                `;
-
-            }
-        );
-
-        card.addEventListener(
-            "mouseleave",
-            () => {
-
-                card.style.transform =
-                    "perspective(1000px) rotateX(0deg) rotateY(0deg)";
-
-            }
-        );
-
+        // Move the glare highlight to match cursor location
+        const glareX = (x / rect.width) * 100;
+        const glareY = (y / rect.height) * 100;
+        glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 80%)`;
+        
+        gsap.to(glare, {
+            opacity: 1,
+            duration: 0.25,
+            overwrite: "auto"
+        });
     });
+
+    card.addEventListener("mouseleave", () => {
+        // Reset card orientation and fade out glare cleanly
+        gsap.to(card, {
+            transform: "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1, 1, 1)",
+            duration: 0.6,
+            ease: "power2.out",
+            overwrite: "auto"
+        });
+        
+        gsap.to(glare, {
+            opacity: 0,
+            duration: 0.6,
+            overwrite: "auto"
+        });
+    });
+});
 
 /* =====================================
    COUNTER ANIMATION
@@ -506,33 +565,22 @@ document.addEventListener(
 ===================================== */
 
 document
-    .querySelectorAll(
-        'a[href^="#"]'
-    )
+    .querySelectorAll('a[href^="#"]')
     .forEach(link => {
-
-        link.addEventListener(
-            "click",
-            e => {
-
-                e.preventDefault();
-
-                document
-                    .querySelector(
-                        link.getAttribute(
-                            "href"
-                        )
-                    )
-                    .scrollIntoView({
-
-                        behavior:
-                            "smooth"
-
-                    });
-
+        link.addEventListener("click", e => {
+            e.preventDefault();
+            const targetId = link.getAttribute("href");
+            const target = document.querySelector(targetId);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+                if (navLinks && navLinks.classList.contains("active")) {
+                    navLinks.classList.remove("active");
+                }
             }
-        );
-
+        });
     });
 
 console.log(
