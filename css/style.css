@@ -1342,32 +1342,51 @@ ANIMATIONS
 ===================================== */
 
 .achievement-timeline {
-
     display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit, minmax(250px, 1fr));
-
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 25px;
-
 }
 
 .achievement {
-
     background: #101010;
-
     padding: 30px;
-
     border-radius: 20px;
-
 }
 
 .achievement h3 {
-
     color: #D4AF37;
-
     margin-bottom: 15px;
+}
 
+.achievement .exp-date {
+    color: #D4AF37;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.achievement h4 {
+    color: #888;
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.achievement .exp-list {
+    margin-bottom: 20px;
+    padding-left: 20px;
+    color: #ccc;
+}
+
+.achievement .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.achievement .tech-stack span {
+    background: #1b1b1b;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
 }
 
 .robot-message {
