@@ -1,6 +1,11 @@
 # AI Profile Website
 This is a modern AI-themed portfolio website for a B.Tech Artificial Intelligence & Machine Learning student. It features a dynamic loader, typing effects, particle animations, interactive project cards, and detailed sections for skills, education, projects, and achievements.
 
+# Portfolio
+Welcome to my Portfolio Website!
+This website showcases my education, technical skills, projects, certifications, internships, and achievements.
+🌐 https://lekhasree0910.github.io/me/
+
 ## Features
 - **AI-Themed Design**: High-tech interface with gold accents.
 - **Dynamic Loader**: Animated boot sequence with typing effect.
