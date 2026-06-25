@@ -202,7 +202,7 @@ animate();
 /* ==========================================
    ROBOT ORBIT PARTICLES
 ========================================== */
-const robotWrapper = document.querySelector(".robot-wrapper");
+/*const robotWrapper = document.querySelector(".robot-wrapper");
 if (robotWrapper) {
     for (let i = 0; i < 18; i++) {
         const orbit = document.createElement("div");
