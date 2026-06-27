@@ -608,3 +608,43 @@ menuToggle.addEventListener(
 
     }
 );
+// Form submission handling
+const contactForm = document.querySelector('.contact-right form');
+if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        fetch(this.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Show thank you message
+                const thanks = document.createElement('div');
+                thanks.style.cssText = `
+                    margin-top: 16px;
+                    padding: 12px;
+                    background: rgba(212,175,55,0.1);
+                    border-left: 4px solid var(--gold);
+                    color: var(--gold);
+                    font-size: 0.95rem;
+                    border-radius: 0 4px 4px 0;
+                `;
+                thanks.textContent = 'Thanks for reaching out! I’ll get back to you soon.';
+                this.parentNode.appendChild(thanks);
+                this.reset();
+                setTimeout(() => thanks.remove(), 5000);
+            } else {
+                throw new Error('Network response was not ok.');
+            }
+        })
+        .catch(error => {
+            console.error('Form submission error:', error);
+            alert('Oops! Something went wrong. Please try again later.');
+        });
+    });
+}
