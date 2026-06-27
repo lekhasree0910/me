@@ -801,22 +801,12 @@ AI • ML • Cloud Portfolio
 
             <div class="contact-right">
 
-                <form>
-
-                    <input type="text" placeholder="Your Name">
-
-                    <input type="email" placeholder="Your Email">
-
-                    <input type="text" placeholder="Subject">
-
-                    <textarea placeholder="Tell me about your project"></textarea>
-
-                    <button>
-
-                        Send Message
-
-                    </button>
-
+                <form action="https://formspree.io/f/mjgqwzrl" method="POST">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="_replyto" placeholder="Your Email" required>
+                    <input type="text" name="subject" placeholder="Subject">
+                    <textarea name="message" placeholder="Tell me about your project" required></textarea>
+                    <button type="submit">Send Message</button>
                 </form>
 
             </div>
@@ -880,7 +870,6 @@ AI • ML • Cloud Portfolio
         </div>
 
     </footer>
-    <script src="js/particles.js"></script>
     <script src="js/main.js"></script>
 
 </body>
