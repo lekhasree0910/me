@@ -250,10 +250,18 @@
 
     }
 
-    .projects-grid {
-
+    .projects-grid,
+    .other-projects {
         grid-template-columns: 1fr;
+    }
 
+    .featured-project {
+        padding: 30px 20px;
+    }
+
+    .project-highlights,
+    .project-card-highlights {
+        grid-template-columns: 1fr;
     }
 
 }
